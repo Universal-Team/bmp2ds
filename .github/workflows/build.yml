@@ -3,8 +3,6 @@ name: Build
 on:
   release:
     types: [created]
-  push:
-    branches: ["*"]
 
 jobs:
   linux:
@@ -22,28 +20,30 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build on linux
+      - name: Build on macOS
         run: g++ bmp2ds.cpp -std=c++11 -o bmp2ds
       - name: "Publish build to GH Actions"
         uses: actions/upload-artifact@v2
         with:
           path: bmp2ds
-          name: "linux"
+          name: "macos"
   windows:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build on linux
+      - name: Build on Windows
+        shell: bash
         run: g++ bmp2ds.cpp -std=c++11 -o bmp2ds
       - name: "Publish build to GH Actions"
         uses: actions/upload-artifact@v2
         with:
           path: bmp2ds
-          name: "linux"
+          name: "windows"
   publish:
     runs-on: ubuntu-latest
     name: Publish builds
     if: ${{ success() && !startsWith(github.ref, 'refs/pull') }}
+    needs: [linux, macos, windows]
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v2
