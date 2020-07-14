@@ -35,7 +35,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build on Windows
         shell: bash
-        run: g++ bmp2ds.cpp -std=c++11 -o bmp2ds
+        run: |
+          g++ bmp2ds.cpp -std=c++11 -o bmp2ds
+          ls
       - name: "Publish build to GH Actions"
         uses: actions/upload-artifact@v2
         with:
