@@ -54,7 +54,7 @@ jobs:
         run: |
           ID=$(jq --raw-output '.release.id' $GITHUB_EVENT_PATH)
 
-          for file in ${{ github.workspace }}/build/*; do
+          for file in ${{ github.workspace }}/*/*; do
             AUTH_HEADER="Authorization: token ${{ secrets.GITHUB_TOKEN }}"
             CONTENT_LENGTH="Content-Length: $(stat -c%s $file)"
             CONTENT_TYPE="Content-Type: application/7z-x-compressed"
