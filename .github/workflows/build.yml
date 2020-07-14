@@ -12,22 +12,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build on linux
-        run: g++ bmp2ds.cpp -std=c++11 -o bmp2ds
+        run: g++ bmp2ds.cpp -std=c++11 -o bmp2ds-linux
       - name: "Publish build to GH Actions"
         uses: actions/upload-artifact@v2
         with:
-          path: bmp2ds
+          path: bmp2ds-linux
           name: "linux"
   macos:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
       - name: Build on macOS
-        run: g++ bmp2ds.cpp -std=c++11 -o bmp2ds
+        run: g++ bmp2ds.cpp -std=c++11 -o bmp2ds-macos
       - name: "Publish build to GH Actions"
         uses: actions/upload-artifact@v2
         with:
-          path: bmp2ds
+          path: bmp2ds-macos
           name: "macos"
   windows:
     runs-on: windows-latest
@@ -35,11 +35,11 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build on Windows
         shell: bash
-        run: g++ bmp2ds.cpp -std=c++11 -o bmp2ds.exe
+        run: g++ bmp2ds.cpp -std=c++11 -o bmp2ds-windows.exe
       - name: "Publish build to GH Actions"
         uses: actions/upload-artifact@v2
         with:
-          path: bmp2ds.exe
+          path: bmp2ds-windows.exe
           name: "windows"
   publish:
     runs-on: ubuntu-latest
