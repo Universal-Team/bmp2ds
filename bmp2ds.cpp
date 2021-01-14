@@ -79,14 +79,9 @@ Image loadBmp16(std::string path, int paletteOffset, int paletteCount) {
 						}
 						break;
 					case 8:
-						image.bitmap.push_back((val >> 7) & 1); // First bit
-						image.bitmap.push_back((val >> 6) & 1); // Second bit
-						image.bitmap.push_back((val >> 5) & 1); // Third bit
-						image.bitmap.push_back((val >> 4) & 1); // Fourth bit
-						image.bitmap.push_back((val >> 3) & 1); // Fifth bit
-						image.bitmap.push_back((val >> 2) & 1); // Sixth bit
-						image.bitmap.push_back((val >> 1) & 1); // Seventh bit
-						image.bitmap.push_back((val >> 0) & 1); // Eighth bit
+						for(int i = 0; i < 8 && i + x < image.width; i++) {
+							image.bitmap.push_back((val >> (7 - i)) & 1);
+						}
 						break;
 				}
 			}
